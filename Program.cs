@@ -30,11 +30,11 @@ namespace IntermediateCSharp.Stopwatch
 
              }
             public  void Stop() {
-                if (_running)
-                {
-                    _end = DateTime.Now;
-                    _running = false;
-                }  
+                if (!_running)
+                    throw new InvalidOperationException("Stopwatch is not running. Please start Stopwatch before stopping");
+               
+                _end = DateTime.Now;
+                _running = false;
             }  
 
         }
@@ -44,7 +44,7 @@ namespace IntermediateCSharp.Stopwatch
             var running = true;
 
             Console.Write("Type 'start' to start the stopwatch & 'stop' to stop it. \n" +
-                "Type 'quit' to quit the program");
+                "Type 'quit' to quit the program \n");
             var stopwatch = new Stopwatch();
 
             while (running)
@@ -74,6 +74,7 @@ namespace IntermediateCSharp.Stopwatch
 
             Console.WriteLine("Stopwatch Program");
             Program.RunStopwatch();
+
         }
     }
 }
